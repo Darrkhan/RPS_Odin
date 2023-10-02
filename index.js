@@ -1,4 +1,3 @@
-const choices = ["Rock", "Paper", "Scissors"];
 
 function getRandomInt(max){
     return Math.floor(Math.random() * max);
@@ -10,36 +9,24 @@ function getPlayerChoice(){
 };
 
 function getComputerChoice (){
+    let choices = ["Rock", "Paper", "Scissors"];
     return choices[getRandomInt(3)];
 };
 
 function playRound(playerSelection, computerSelection){
+    let winningConditions ={
+        ROCK: ["Scissors"],
+        PAPER: ["Rock"],
+        SCISSORS: ["Paper"]
+    };
     if (playerSelection.toUpperCase() == computerSelection.toUpperCase()){
         return 'Even !';
     }
-    else if (playerSelection.toUpperCase() == "ROCK"){
-        if(computerSelection == "Scissors"){
-            return "You win ! Rock beats Scissors !"
-        }
-        else if(computerSelection == "Paper"){
-            return "You lose ! Paper beats Rock"
-        }
+    else if (winningConditions[playerSelection.toUpperCase()].includes(computerSelection)){
+        return `You win ! ${playerSelection} beats ${computerSelection} !`
     }
-    else if (playerSelection.toUpperCase() == "PAPER"){
-        if(computerSelection == "Scissors"){
-            return "You lose ! Scissors beats Paper !"
-        }
-        else if(computerSelection == "Rock"){
-            return "You win ! Paper beats Rock !"
-        }
-    }
-    else if (playerSelection.toUpperCase() == "SCISSORS"){
-        if(computerSelection == "Rock"){
-            return "You lose ! Rock beats Scissors !"
-        }
-        else if(computerSelection == "Paper"){
-            return "You win ! Scissors beats Paper !"
-        }
+    else {
+        return `You lose ! ${computerSelection} beats ${playerSelection} !`
     }
 };
 
